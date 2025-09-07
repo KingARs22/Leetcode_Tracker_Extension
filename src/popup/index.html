@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>LC/CF Helper</title>
+        <link rel = "stylesheet" href = "popup.css" />
+    </head>
+    <body>
+        <div class="wrap">
+            <h1>LC/CF Helper</h1>
+            <section class="cards">
+                <div class="card">
+                    <h3>Progress</h3>
+                    <div id="stats">Loading...</div>
+                </div>
+                <div class ="card">
+                    <h3>Settings</h3>
+                    <label>Reminder Time <input id="reminderTime" type="time" value="20:00"/></label>
+                    <label>Prefer Leetcode <input id="preferLC" type="checkbox" checked/></label>
+                    <label>Codeforces Handle <input id="cfHandle" placeholder="tourist"/></label>
+                    <button id="save">Save</button>
+                </div>
+                </section>
+                <section class="actions">
+                    <button id="openLC">Open LC Problemset</button>
+                    <button id="openCF">Open CF Problemset</button>
+                    <button id="export">Export JSON</button>
+                    <input id="importFile" type="file" accept="application/json" style="display: none;"/>
+                    <button id="import">Import JSON</button>
+                </section>
+                <div class="foot">Made by AKSHAT</div>
+        </div>
+        <script type="module" src="popup.js"></script>
+    </body>
+</html>

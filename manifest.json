@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "LeetCode & Codeforces Helper",
+  "version": "0.1.0",
+  "description": "Notes, progress tracking, daily reminders, and quick complexity hints for LC/CF.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://leetcode.cn/*",
+    "https://codeforces.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "LC/CF Helper",
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://leetcode.com/problems/*", "https://leetcode.cn/problems/*"],
+      "js": [
+        "src/lib/storage.js",
+        "src/lib/complexity.js",
+        "src/content/leetcode.js"
+      ],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://codeforces.com/problemset/problem/*",
+        "https://codeforces.com/contest/*/problem/*"
+      ],
+      "js": [
+        "src/lib/storage.js",
+        "src/lib/complexity.js",
+        "src/content/codeforces.js"
+      ],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
