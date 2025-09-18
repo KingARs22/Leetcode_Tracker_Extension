@@ -59,6 +59,22 @@ function calcStreak(daySet) {
     return streak;
 }
 
+async function loadContests() {
+  const { contests } = await chrome.storage.local.get(['contests']);
+  const container = document.getElementById('contests');
+  container.innerHTML = '';
+  (contests || []).forEach(c => {
+    const d = new Date(c.start).toLocaleString();
+    const div = document.createElement('div');
+    div.className = 'contest';
+    div.innerHTML = `<b>${c.site}</b>: ${c.name} <br><small>${d}</small>`;
+    div.addEventListener('click', () => chrome.tabs.create({ url: c.url }));
+    container.appendChild(div);
+  });
+}
+loadContests();
+
+
 // --- Save settings ---
 $('#save').addEventListener('click', () => {
     const reminderTime = $('#reminderTime').value;
@@ -98,6 +114,24 @@ $('#importFile').addEventListener('change', async (e) => {
     const text = await f.text();
     const json = JSON.parse(text);
     chrome.storage.local.set({ problems: json }, refreshStats);
+});
+
+// --- Contest Reminder Button ---
+$('#setReminder').addEventListener('click', async () => {
+  chrome.storage.local.get(['contests'], ({ contests }) => {
+    if (!contests || contests.length === 0) {
+      alert("No contests available to set reminder.");
+      return;
+    }
+    const next = contests[0]; // pick nearest contest
+    chrome.runtime.sendMessage({ type: "setContestReminder", payload: next }, (resp) => {
+      if (resp?.ok) {
+        alert(`Reminder set for ${next.name} at ${resp.scheduled}`);
+      } else {
+        alert("Failed to set reminder: " + resp?.reason);
+      }
+    });
+  });
 });
 
 // --- Initial refresh ---

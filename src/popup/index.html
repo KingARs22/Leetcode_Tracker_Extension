@@ -3,32 +3,46 @@
     <head>
         <meta charset="utf-8" />
         <title>LC/CF Helper</title>
-        <link rel = "stylesheet" href = "popup.css" />
+        <link rel="stylesheet" href="popup.css" />
     </head>
     <body>
         <div class="wrap">
             <h1>LC/CF Helper</h1>
+            
+            <!-- Progress Card -->
             <section class="cards">
                 <div class="card">
                     <h3>Progress</h3>
                     <div id="stats">Loading...</div>
                 </div>
-                <div class ="card">
+
+                <!-- Settings Card -->
+                <div class="card">
                     <h3>Settings</h3>
                     <label>Reminder Time <input id="reminderTime" type="time" value="20:00"/></label>
                     <label>Prefer Leetcode <input id="preferLC" type="checkbox" checked/></label>
                     <label>Codeforces Handle <input id="cfHandle" placeholder="tourist"/></label>
                     <button id="save">Save</button>
                 </div>
-                </section>
-                <section class="actions">
-                    <button id="openLC">Open LC Problemset</button>
-                    <button id="openCF">Open CF Problemset</button>
-                    <button id="export">Export JSON</button>
-                    <input id="importFile" type="file" accept="application/json" style="display: none;"/>
-                    <button id="import">Import JSON</button>
-                </section>
-                <div class="foot">Made by AKSHAT</div>
+
+                <!-- Upcoming Contests Card -->
+            </section>
+
+            <!-- Actions -->
+            <section class="actions">
+                <div class="card">
+                    <h3>Upcoming Contests</h3>
+                    <div id="contests">Loading contests...</div>
+                    <button id="setReminder">Set Contest Reminder</button>
+                </div>
+                <button id="openLC">Open LC Problemset</button>
+                <button id="openCF">Open CF Problemset</button>
+                <button id="export">Export JSON</button>
+                <input id="importFile" type="file" accept="application/json" style="display: none;"/>
+                <button id="import">Import JSON</button>
+            </section>
+
+            <div class="foot">Made by AKSHAT</div>
         </div>
         <script type="module" src="popup.js"></script>
     </body>

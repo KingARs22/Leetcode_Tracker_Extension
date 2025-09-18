@@ -97,8 +97,14 @@
     const observer = new MutationObserver(() => {
         const verdictNode = document.querySelector('span[data-e2e-locator="submission-result"]');
         if (verdictNode && /Accepted/.test(verdictNode.textContent)) {
-            markSolved();
-        }
+  // use global DB
+  window.DB?.markSolved?.(slug, 'leetcode', { source: 'accepted-dom' })
+    .then(() => {
+      // optionally update UI:
+      highlightSolved?.();
+    })
+    .catch(err => console.error('markSolved error', err));
+}
     });
 
     observer.observe(document.documentElement, { childList: true, subtree: true });

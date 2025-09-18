@@ -13,12 +13,14 @@
     "alarms",
     "notifications",
     "activeTab",
-    "scripting"
+    "scripting","tabs"
   ],
   "host_permissions": [
     "https://leetcode.com/*",
     "https://leetcode.cn/*",
-    "https://codeforces.com/*"
+    "https://codeforces.com/*",
+    "https://codeforces.com/*",
+    "https://kontests.net/*"
   ],
   "background": {
     "service_worker": "src/background.js"
